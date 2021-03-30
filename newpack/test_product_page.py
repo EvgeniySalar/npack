@@ -1,5 +1,6 @@
 import time
 
+import pytest
 from selenium.webdriver import ActionChains
 
 from home_page import HomePage
@@ -8,20 +9,21 @@ from newpack.locators import GUESTS_COUNT, INCREASE_PERSON_NUMBER, DATA_GROUP_CH
 
 
 class TestSiteFunc:
+    @pytest.fixture(scope="session", autouse=True)
     def setup(self, chrome_drv):
         self.home_page = HomePage(chrome_drv)
         yield
 
-    def test_click_on_the_button(self, chrome_drv):
+    def test_click_on_the_button(self):
         # time.sleep(1)
         self.home_page.button_guests_elements().click()
         self.home_page.button_increase_elements().click()
 
 
     #     # assert guest_count_1.is_displayed() is True
-    #     btn_click = chrome_drv.find_element_by_xpath(INCREASE_PERSON_NUMBER)
-    #     actions = ActionChains(chrome_drv)
-    #     actions.double_click(btn_click).perform()  # double click on button
+        btn_click = chrome_drv.find_element_by_xpath(INCREASE_PERSON_NUMBER)
+        actions = ActionChains(chrome_drv)
+        actions.double_click(btn_click).perform()  # double click on button
     #     # assert btn_click.is_enabled() is True
     #     # assert .is_displayed() is True или так ????
     #
